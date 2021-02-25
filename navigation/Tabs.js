@@ -1,6 +1,7 @@
 import React from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 import Movies from '../screens/Movies';
 import Tv from '../screens/Tv';
 import Search from '../screens/Search';
@@ -20,14 +21,23 @@ export default ({ navigation, route }) => {
         const name = getHeaderName(route)
         navigation.setOptions({ 
             title: name,
-            headerShown: name !== "TV",
-            headerStyle: {
-                backgroundColor: name !== "Search" ? "skyblue" : "white"
-            }
         })
     }, [route])
     return (
-        <Tabs.Navigator>
+        <Tabs.Navigator 
+            screenOptions={({route}) => ({
+                tabBarIcon: ({ focused }) => {
+                    return <Ionicons name="ios-film" color="white" size={30} />;
+                }
+            })}
+            tabBarOptions={{
+                showLabel: false,
+                style: {
+                    backgroundColor: "black",
+                    borderTopColor: "black"
+                }
+            }}
+        >
         <Tabs.Screen name="Movies" component={Movies}/>
         <Tabs.Screen name="TV" component={Tv}/>
         <Tabs.Screen name="Search" component={Search}/>
