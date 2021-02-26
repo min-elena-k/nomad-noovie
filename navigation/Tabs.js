@@ -7,6 +7,7 @@ import Tv from '../screens/Tv';
 import Search from '../screens/Search';
 import Favs from '../screens/Favs';
 import { useLayoutEffect } from 'react';
+import { Platform } from 'react-native';
 
 
 const Tabs = createBottomTabNavigator();
@@ -27,7 +28,20 @@ export default ({ navigation, route }) => {
         <Tabs.Navigator 
             screenOptions={({route}) => ({
                 tabBarIcon: ({ focused }) => {
-                    return <Ionicons name="ios-film" color="white" size={30} />;
+                    let iconName = Platform.OS === "ios" ? "ios-" : "md-";
+                    if (route.name === "Movies") {
+                        iconName += "film"
+                    } else if (route.name === "TV") {
+                        iconName += "tv"
+                    } else if (route.name === "Search") {
+                        iconName += "search"
+                    } else if (route.name === "Favorites") {
+                        iconName += "heart"
+                    }
+                    return <Ionicons 
+                        name={iconName} 
+                        color={focused ? "white" : "grey"} 
+                        size={36} />;
                 }
             })}
             tabBarOptions={{
