@@ -1,42 +1,43 @@
 import React from 'react';
 import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
-import { Dimensions } from "react-native";
+import { ActivityIndicator, Dimensions } from "react-native";
 
 const {width, height } = Dimensions.get("screen");
 
 const Container = styled.View`
     flex: 1;
     background-color: black;
+    justify-content: center;
 `;
 
 const Header = styled.View`
     width: 100%;
-    height: ${width};
+    height: ${height / 3}px;
 `;
 
 const Section = styled.View`
     background-color: red;
-    height: ${height / 3}px;
+    height: 100%;
 `;
 
 const Text = styled.Text``;
 
-const MoviesPresenter = ({ loading }) => {
+const MoviesPresenter = ({ loading, nowPlaying }) => {
+    console.log(nowPlaying)
     return (
         <Container>
-            {loading ? null : (
+            {loading ? (
+                <ActivityIndicator color="white" size="small"/>
+            ) : (
             <Header>
                 <Swiper controlsEnabled={false} loop timeout={3}>
-                    <Section>
-                        <Text>Hello</Text>
-                    </Section>
-                    <Section>
-                        <Text>Hello</Text>
-                    </Section>
-                    <Section>
-                        <Text>Hello</Text>
-                    </Section>
+                   {nowPlaying.map(movie => (
+                    //    <Text key={movie.id}> di~</Text>
+                        <Section key={movie.id}>
+                            <Text>{movie.original_title}</Text>
+                        </Section>
+                   ))}
                 </Swiper>
             </Header>
             )}
