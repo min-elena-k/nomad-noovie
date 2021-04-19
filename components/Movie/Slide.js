@@ -21,7 +21,7 @@ const BG = styled.Image`
 `;
 
 const Content = styled.View`
-	height: 100%
+	height: 100%;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-around;
@@ -72,9 +72,9 @@ const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
 			<Content>
 				<Poster url={apiImage(poster)} />
 				<Data>
-					<Title>{title.length > 40 ? `${title.slice(0, 40)}...` : title}</Title>
+					<Title>{title.length > 15 ? `${title.slice(0, 15)}...` : title}</Title>
 					<Votes>⭐ {votes} / 10</Votes>
-					<Overview>{overview.length > 120 ? `${overview.slice(0, 120)}...` : overview}</Overview>
+					<Overview>{overview.length > 100 ? `${overview.slice(0, 100)}...` : overview}</Overview>
 					<TouchableOpacity>
 						<Button>
 							<ButtonText>View Details</ButtonText>
